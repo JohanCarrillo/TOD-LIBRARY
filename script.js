@@ -47,13 +47,31 @@ function deleteBook(bookId){
 	const library = document.querySelector('#library');
 	//const bookId = '#book' + index;
 	const toDeleteBook = library.querySelector(bookId);
-	console.log(toDeleteBook);
-	console.log(bookId);
 	library.removeChild(toDeleteBook);
-
 	// delete from the array
 	const index = Number(bookId.slice(5));
 	delete myLibrary[index];
+}
+
+function changeStatus(bookId){
+	// this function changes the read status of the book
+
+	const bookDisplay = document.querySelector(bookId);
+	const index = Number(bookId.slice(5));
+	const book = myLibrary[index];
+	
+	if (book.state === true){
+		book.state = false;
+		bookDisplay.classList.remove('read');
+		bookDisplay.classList.add('not-read');
+	} else {
+		book.state = true;
+		bookDisplay.classList.remove('not-read');
+		bookDisplay.classList.add('read');
+	}
+
+	// change book status in array
+
 }
 // ------------------------- DISPLAY LIBRARY --------------------------------
 function displayBook(book, index) {
@@ -62,6 +80,12 @@ function displayBook(book, index) {
 	const bookDiv = document.createElement('div');
 	bookDiv.classList.add('book');
 	bookDiv.id = 'book' + index;
+
+	// add button to change read status
+	const changeStatusButton = document.createElement('input');
+	changeStatusButton.classList.add('status-button');
+	changeStatusButton.type = "checkbox";
+	bookDiv.appendChild(changeStatusButton);
 
 	for (const [key, value] of Object.entries(book)) {
 		// if the book is read show it with another background color
@@ -72,8 +96,10 @@ function displayBook(book, index) {
 		}
 		else if (value === true) {
 			bookDiv.classList.add('read');
+			changeStatusButton.checked = true;
 		} else {
 			bookDiv.classList.add('not-read');
+			changeStatusButton.checked = false;
 		}
 	}
 	// add delete button
@@ -96,16 +122,27 @@ displayBook(myLibrary[2], 2);
 // ---------------------- BUTTON FUNCTIONALITY --------------------------
 // add a new book button functionality
 document.querySelector('#save-button').addEventListener('click', addBookToLibrary);
+
 // display the modal to add a new book 
 document.querySelector('#icon button').addEventListener('click', () => {
 	const modal = document.querySelector('#modal');
 	modal.style.display = 'flex';
 })
+
 // hide the modal and clean the inputs when pressing excape button
 document.querySelector('#esc-button button').addEventListener('click', hideModal);
+
 // delete book button
 const deleteButtons = document.querySelectorAll('.delete-button');
 deleteButtons.forEach(element => element.addEventListener('click', () => {
-	const bookId = element.parentNode.id
+	const bookId = element.parentNode.id;
 	deleteBook('#' + bookId);
 }));
+
+// change read state button
+const readStateButtons = document.querySelectorAll('.status-button');
+readStateButtons.forEach(element => element.addEventListener('change', () => {
+	const bookId = element.parentNode.id;
+	console.log(bookId);
+	changeStatus('#' + bookId);
+}))
