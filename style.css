@@ -18,9 +18,17 @@
 	height: 150px;
 	flex: 0 0 auto;
 	border: solid purple 2px;
-	padding: 5px;
+	padding: 10px;
 	text-align: center;
 	justify-content: space-evenly;
+}
+
+.delete-button {
+/* 	max-width: 20px;
+	height: 25px;
+	flex: 0 0 auto; */
+	max-width: 40px;
+	align-self: flex-end;
 }
 
 .read {

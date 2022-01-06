@@ -37,15 +37,31 @@ function hideModal() {
 	});
 	inputs[inputs.length-1].checked = false;
 	// hide the modal
-	//document.querySelector('#modal').style.display = 'none';
+	document.querySelector('#modal').style.display = 'none';
+}
 
+function deleteBook(bookId){
+	// this function deletes a book from the library
+	
+	// delete from the library display
+	const library = document.querySelector('#library');
+	//const bookId = '#book' + index;
+	const toDeleteBook = library.querySelector(bookId);
+	console.log(toDeleteBook);
+	console.log(bookId);
+	library.removeChild(toDeleteBook);
+
+	// delete from the array
+	const index = Number(bookId.slice(5));
+	delete myLibrary[index];
 }
 // ------------------------- DISPLAY LIBRARY --------------------------------
-function displayBook(book) {
+function displayBook(book, index) {
 	// this function makes visible the book information
 	const library = document.querySelector('#library');
 	const bookDiv = document.createElement('div');
 	bookDiv.classList.add('book');
+	bookDiv.id = 'book' + index;
 
 	for (const [key, value] of Object.entries(book)) {
 		// if the book is read show it with another background color
@@ -60,6 +76,12 @@ function displayBook(book) {
 			bookDiv.classList.add('not-read');
 		}
 	}
+	// add delete button
+	const deleteBookButton = document.createElement('button');
+	deleteBookButton.classList.add('delete-button');
+	deleteBookButton.textContent = 'DEL';
+	bookDiv.appendChild(deleteBookButton);
+	// add book to library
 	library.appendChild(bookDiv);
 }
 
@@ -67,9 +89,9 @@ function displayBook(book) {
 myLibrary.push(new Book('Lolita', 'Nabokov, V.', 300, false));
 myLibrary.push(new Book('Don Quijote de la Mancha', 'Saavedra, M.', 1000, false));
 myLibrary.push(new Book('Surely You\'re Joking Mr. Feynman', 'Feynman, R.', 350, true));
-displayBook(myLibrary[0]);
-displayBook(myLibrary[1]);
-displayBook(myLibrary[2]);
+displayBook(myLibrary[0], 0);
+displayBook(myLibrary[1], 1);
+displayBook(myLibrary[2], 2);
 
 // ---------------------- BUTTON FUNCTIONALITY --------------------------
 // add a new book button functionality
@@ -81,3 +103,9 @@ document.querySelector('#icon button').addEventListener('click', () => {
 })
 // hide the modal and clean the inputs when pressing excape button
 document.querySelector('#esc-button button').addEventListener('click', hideModal);
+// delete book button
+const deleteButtons = document.querySelectorAll('.delete-button');
+deleteButtons.forEach(element => element.addEventListener('click', () => {
+	const bookId = element.parentNode.id
+	deleteBook('#' + bookId);
+}));
