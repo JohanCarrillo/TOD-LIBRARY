@@ -1,0 +1,113 @@
+/* body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 15vh 20vw;
+}
+ */
+#library {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 15px;
+}
+
+.book {
+	display: flex;
+	flex-direction: column;
+	width: 250px;
+	height: 150px;
+	flex: 0 0 auto;
+	border: solid purple 2px;
+	padding: 5px;
+	text-align: center;
+	justify-content: space-evenly;
+}
+
+.read {
+	background-color: plum;
+}
+.not-read {
+	background-color: darksalmon;
+}
+
+.book .new {
+	flex: 0 1 auto;
+	border-bottom: solid black 1px;
+}
+
+#icon {
+	flex: 2 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 90%;
+}
+
+#icon button {
+	border-radius: 50%;
+	background-color: white;
+	width: 40px;
+	height: 40px;
+	font-size: 25px;
+}
+
+/* ------------------------- modal style ------------------------------ */
+
+h2 {
+	text-align: center;
+}
+
+#modal {
+	/* display: flex; */
+	display: none;
+	flex-direction: column;
+	border: solid red 2px;
+	padding: 20px;
+	max-height: 640px;
+	max-width: 400px;
+	width: 300px;
+	height: 400px;
+}
+
+#esc-button button{
+	float: right;
+	/* border-radius: 50%; */
+	
+}
+
+.modal-element {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+input {
+	flex: 0 1 auto;
+	border: solid greenyellow 1px;
+	background-color: pink;
+	padding-left: 5%;
+	padding-right: 5%;
+	height: 25px;
+	width: auto;
+}
+
+.modal-element.last-element {
+	display: flex;
+	flex-direction: row;
+	justify-content:space-evenly;
+
+}
+
+.modal-element .text {
+	font-weight: bold;
+}
+
+#save-button {
+	text-align: center;
+}
+
+#save-button button {
+	font-size: 30px;
+	border: solid black 2px;
+	background-color: burlywood;
+}
