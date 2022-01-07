@@ -36,7 +36,7 @@ function hideModal() {
 	});
 	inputs[inputs.length-1].checked = false;
 	// hide the modal
-	document.querySelector('#modal').style.display = 'none';
+	document.querySelector('#modal-container').style.display = 'none';
 }
 
 function deleteBook(bookId){
@@ -132,34 +132,9 @@ document.querySelector('#save-button').addEventListener('click', addBookToLibrar
 
 // display the modal to add a new book 
 document.querySelector('#icon button').addEventListener('click', () => {
-	const modal = document.querySelector('#modal');
+	const modal = document.querySelector('#modal-container');
 	modal.style.display = 'flex';
 });
 
 // hide the modal and clean the inputs when pressing excape button
 document.querySelector('#esc-button button').addEventListener('click', hideModal);
-
-// --------------------------------- TEST THINGS ------------------------------
-
-/* // test books
-myLibrary.push(new Book('Lolita', 'Nabokov, V.', 300, false));
-myLibrary.push(new Book('Don Quijote de la Mancha', 'Saavedra, M.', 1000, false));
-myLibrary.push(new Book('Surely You\'re Joking Mr. Feynman', 'Feynman, R.', 350, true));
-displayBook(myLibrary[0], 0);
-displayBook(myLibrary[1], 1);
-displayBook(myLibrary[2], 2);
-
-/* // delete book button
-const deleteButtons = document.querySelectorAll('.delete-button');
-deleteButtons.forEach(element => element.addEventListener('click', () => {
-	const bookId = element.parentNode.id;
-	deleteBook('#' + bookId);
-}));
-
-// change read state button
-const readStateButtons = document.querySelectorAll('.status-button');
-readStateButtons.forEach(element => element.addEventListener('change', () => {
-	const bookId = element.parentNode.id;
-	console.log(bookId);
-	changeStatus('#' + bookId);
-})); */

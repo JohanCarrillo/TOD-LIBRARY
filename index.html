@@ -9,6 +9,7 @@
 	<link href="style.css" rel="stylesheet">
 </head>
 <body>
+	<h1>Welcome to your library!</h1>
 	<div id="library">
 		<div class="book">
 			<div class="text new">Add new book</div>
@@ -16,28 +17,29 @@
 		</div>
 	</div>
 
-
-	<div id="modal">
-		<div id="esc-button"><button>X</button></div>
-		<h2>Insert Book Information:</h2>
-		<div class="modal-element">
-			<span class="text">Title:</span>
-			<input type="text" id="book-title">
+	<div id="modal-container">
+		<div id="modal">
+			<div id="esc-button"><button>X</button></div>
+			<h2>Insert Book Information:</h2>
+			<div class="modal-element">
+				<span class="text">Title:</span>
+				<input type="text" id="book-title" required=true>
+			</div>
+			<div class="modal-element">
+				<span class="text">Author:</span> 
+				<input type="text" id="book-author" required>
+			</div>
+			<div class="modal-element">
+				<span class="text">Pages:</span>
+				<input type="text" id="book-pages" required>
+			</div>
+			<div class="modal-element last-element">
+				Did you already read it? <input type="checkbox" id="book-state">
+			</div>
+			<div id="save-button">
+				<button>SAVE</button>
 		</div>
-		<div class="modal-element">
-			<span class="text">Author:</span> 
-			<input type="text" id="book-author">
-		</div>
-		<div class="modal-element">
-			<span class="text">Pages:</span>
-			<input type="text" id="book-pages">
-		</div>
-		<div class="modal-element last-element">
-			Did you already read it? <input type="checkbox" id="book-state">
-		</div>
-		<div id="save-button">
-			<button>SAVE</button>
-		</div>
+	</div>
 
 	</div>
 </body>
