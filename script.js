@@ -15,7 +15,7 @@ Book.prototype.info = function() {
 function addBookToLibrary() {
 	// add a new book to the library array using the input information
 	// catch all the input values [title, author, pages, readState]
-	const inputs = document.querySelectorAll('input');
+	const inputs = document.querySelectorAll('.modal-element input');
 	let title = inputs[0].value,
 		author = inputs[1].value,
 		pages = inputs[2].value,
@@ -23,8 +23,7 @@ function addBookToLibrary() {
 	
 	const newBook = new Book(title, author, pages, state);  // create new book
 	myLibrary.push(newBook);  // add new book to library
-	displayBook(newBook);
-	console.log(myLibrary);
+	displayBook(newBook, myLibrary.length-1);
 }
 
 function hideModal() {
@@ -102,22 +101,30 @@ function displayBook(book, index) {
 			changeStatusButton.checked = false;
 		}
 	}
+
 	// add delete button
 	const deleteBookButton = document.createElement('button');
 	deleteBookButton.classList.add('delete-button');
 	deleteBookButton.textContent = 'DEL';
 	bookDiv.appendChild(deleteBookButton);
+
+	// add delete button functionality
+	deleteBookButton.addEventListener('click', () => {
+		const bookId = deleteBookButton.parentNode.id;
+		deleteBook('#' + bookId);
+	});
+	// add read state button functionality
+	changeStatusButton.addEventListener('change', () => {
+		const bookId = changeStatusButton.parentNode.id;
+		console.log(bookId);
+		changeStatus('#' + bookId);
+	});
+
+
 	// add book to library
 	library.appendChild(bookDiv);
-}
 
-// test books
-myLibrary.push(new Book('Lolita', 'Nabokov, V.', 300, false));
-myLibrary.push(new Book('Don Quijote de la Mancha', 'Saavedra, M.', 1000, false));
-myLibrary.push(new Book('Surely You\'re Joking Mr. Feynman', 'Feynman, R.', 350, true));
-displayBook(myLibrary[0], 0);
-displayBook(myLibrary[1], 1);
-displayBook(myLibrary[2], 2);
+}
 
 // ---------------------- BUTTON FUNCTIONALITY --------------------------
 // add a new book button functionality
@@ -127,12 +134,22 @@ document.querySelector('#save-button').addEventListener('click', addBookToLibrar
 document.querySelector('#icon button').addEventListener('click', () => {
 	const modal = document.querySelector('#modal');
 	modal.style.display = 'flex';
-})
+});
 
 // hide the modal and clean the inputs when pressing excape button
 document.querySelector('#esc-button button').addEventListener('click', hideModal);
 
-// delete book button
+// --------------------------------- TEST THINGS ------------------------------
+
+/* // test books
+myLibrary.push(new Book('Lolita', 'Nabokov, V.', 300, false));
+myLibrary.push(new Book('Don Quijote de la Mancha', 'Saavedra, M.', 1000, false));
+myLibrary.push(new Book('Surely You\'re Joking Mr. Feynman', 'Feynman, R.', 350, true));
+displayBook(myLibrary[0], 0);
+displayBook(myLibrary[1], 1);
+displayBook(myLibrary[2], 2);
+
+/* // delete book button
 const deleteButtons = document.querySelectorAll('.delete-button');
 deleteButtons.forEach(element => element.addEventListener('click', () => {
 	const bookId = element.parentNode.id;
@@ -145,4 +162,4 @@ readStateButtons.forEach(element => element.addEventListener('change', () => {
 	const bookId = element.parentNode.id;
 	console.log(bookId);
 	changeStatus('#' + bookId);
-}))
+})); */
