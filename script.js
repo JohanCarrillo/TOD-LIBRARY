@@ -1,15 +1,16 @@
 const myLibrary = [];  // will contain all books
 
 // -------------------- ADDING BOOKS FUNCTIONALLITY ---------------------------
-function Book(title, author, pages, state){
-	// constructor of book object
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.state = state;
-}
-Book.prototype.info = function() {
-	return `${this.titlle}, by ${this.author}, with ${this.pages} pages. State: ${this.state}`;
+class Book {
+	constructor(title, author, pages, state) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.state = state;
+	}
+	info() {
+		return `${this.titlle}, by ${this.author}, with ${this.pages} pages. State: ${this.state}`;
+	}
 }
 
 function addBookToLibrary() {
