@@ -14,12 +14,13 @@ Book.prototype.info = function() {
 
 function addBookToLibrary() {
 	// add a new book to the library array using the input information
+
 	// catch all the input values [title, author, pages, readState]
 	const inputs = document.querySelectorAll('.modal-element input');
 	let title = inputs[0].value,
-		author = inputs[1].value,
-		pages = inputs[2].value,
-		state = inputs[3].checked;  // bool: true if checked
+			author = inputs[1].value,
+			pages = inputs[2].value,
+			state = inputs[3].checked;  // bool: true if checked
 	
 	const newBook = new Book(title, author, pages, state);  // create new book
 	myLibrary.push(newBook);  // add new book to library
@@ -48,7 +49,7 @@ function deleteBook(bookId){
 	const toDeleteBook = library.querySelector(bookId);
 	library.removeChild(toDeleteBook);
 	// delete from the array
-	const index = Number(bookId.slice(5));
+	const index = Number(bookId.slice(5));  // index in array is storaged in id
 	delete myLibrary[index];
 }
 
@@ -68,13 +69,11 @@ function changeStatus(bookId){
 		bookDisplay.classList.remove('not-read');
 		bookDisplay.classList.add('read');
 	}
-
-	// change book status in array
-
 }
 // ------------------------- DISPLAY LIBRARY --------------------------------
 function displayBook(book, index) {
 	// this function makes visible the book information
+
 	const library = document.querySelector('#library');
 	const bookDiv = document.createElement('div');
 	bookDiv.classList.add('book');
@@ -113,13 +112,13 @@ function displayBook(book, index) {
 		const bookId = deleteBookButton.parentNode.id;
 		deleteBook('#' + bookId);
 	});
+	
 	// add read state button functionality
 	changeStatusButton.addEventListener('change', () => {
 		const bookId = changeStatusButton.parentNode.id;
 		console.log(bookId);
 		changeStatus('#' + bookId);
 	});
-
 
 	// add book to library
 	library.appendChild(bookDiv);
